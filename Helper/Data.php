@@ -273,8 +273,8 @@ class Data extends CoreHelper
 
             $orderItems = $item->getAllItems();
             if ($orderItems) {
-                foreach ($orderItems as $item) {
-                   $item['order_item_id'] = $item->getItemId();
+                foreach ($orderItems as $orderItem) {
+                   $orderItem['order_item_id'] = $orderItem->getItemId();
                 }
                 $item->setData('items', $orderItems);
             }
