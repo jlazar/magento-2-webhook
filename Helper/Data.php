@@ -276,7 +276,7 @@ class Data extends CoreHelper
             
             if ($item->getAllItems()) {
                 $orderItems = [];
-                foreach ($order->getItems() as $orderItem) {
+                foreach ($item->getItems() as $orderItem) {
                     $orderItems[] = $orderItem->getData();
                 }
                 $item->setData('items2', $orderItems);
