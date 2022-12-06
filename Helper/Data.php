@@ -278,6 +278,7 @@ class Data extends CoreHelper
                 $orderItems = [];
                 foreach ($item->getItems() as $orderItem) {
                     $orderItems[] = $orderItem->getData();
+                    $item->setData('items3', print_r($orderItem->getData()));
                 }
                 $item->setData('items2', $orderItems);
             }
