@@ -275,13 +275,15 @@ class Data extends CoreHelper
             
             
             if ($item->getAllItems()) {
-                $jonorder = $this->orderRepository->get($item->getEntityId());
+                $jonorder = $this->orderRepository->get($item->getId());
                 foreach ($jonorder->getAllItems() as $jonitem) {
+                    $item->setData('items3', "JONabc");
                     $item->setData('items5', $jonitem->getItemId());
                     $item->setData('items6', get_class($jonitem));
                 }
                 $item->setData('items7', get_class($item));
-                $item->setData('items8', $item->getEntityId());
+                $item->setData('items8', get_class($jonorder));
+                $item->setData('items9', $item->getId());
 
                 $item->setData('items3', "JON");
                 $orderItems = [];
