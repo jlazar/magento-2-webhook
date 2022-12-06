@@ -275,13 +275,15 @@ class Data extends CoreHelper
             if ($item->getAllItems()) {
                 $orderItems = [];
                 /** @var OrderItem $orderItem */
-                foreach ($order->getAllItems() as $orderItem) {
+                foreach ($item->getAllItems() as $orderItem) {
                     $orderItems[] = [
                         'item_id' => $orderItem->getItemId(),
                         'order_item_id' => $orderItem->getOrderItemId(),
                         'id' => $orderItem->getId(),
                     ];
                 }
+                error_log(print_r($orderItems, TRUE)); 
+
                 $item->setData('items2', $orderItems);
             }
 
