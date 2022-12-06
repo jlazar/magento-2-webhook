@@ -271,11 +271,16 @@ class Data extends CoreHelper
                 $item->setStockItem(null);
             }
 
-            $orderItems = $item->getAllItems();
-            if ($orderItems) {
-                foreach ($orderItems as $orderItem) {
-                   $orderItem['order_item_id'] = $orderItem->getItemId();
-                   $orderItem['item_id'] = $orderItem->getId();
+            
+            if ($item->getAllItems()) {
+                $orderItems = [];
+                /** @var OrderItem $orderItem */
+                foreach ($order->getAllItems() as $orderItem) {
+                    $orderItems[] = [
+                        'item_id' => $orderItem->getItemId(),
+                        'order_item_id' => $orderItem->getOrderItemId(),
+                        'id' => $orderItem->getId(),
+                    ];
                 }
                 $item->setData('items2', $orderItems);
             }
