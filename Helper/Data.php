@@ -275,37 +275,10 @@ class Data extends CoreHelper
             
             
             if ($item->getAllItems()) {
-                $jonorder = $this->orderRepository->get($item->getId());
-                foreach ($jonorder->getAllItems() as $jonitem) {
-                    $item->setData('items3', "JONabc");
-                    $item->setData('items5', $jonitem->getItemId());
-                    $item->setData('items6', get_class($jonitem));
-                }
-                $item->setData('items7', get_class($item));
-                $item->setData('items8', get_class($jonorder));
-                $item->setData('items9', $item->getId());
-
-                $item->setData('items3', "JON");
                 $orderItems = [];
-                /** @var OrderItem $orderItem */
-                foreach ($item->getAllItems() as $orderItem) {
-                    if ($orderItem) {
-                        $item->setData('items3', "JON2");
-                    }
-
-                    $item->setData('items4', get_class($orderItem));
-
-                    if ($orderItem->getOrderItemId()) {
-                        $item->setData('items3', "JON3");
-                    }
-
-                    $orderItems[] = [
-                        'item_id' => $orderItem->getItemId(),
-                        'order_item_id' => $orderItem->getOrderItemId(),
-                        'id' => $orderItem->getId(),
-                    ];
+                foreach ($order->getItems() as $orderItem) {
+                    $orderItems[] = $orderItem->getData();
                 }
-
                 $item->setData('items2', $orderItems);
             }
 
