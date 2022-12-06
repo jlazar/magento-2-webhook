@@ -281,7 +281,7 @@ class Data extends CoreHelper
                         $item->setData('items3', "JON2");
                     }
 
-                    $item->setData('items4', var_dump($orderItem));
+                    $item->setData('items4', get_class($orderItem));
 
                     if ($orderItem->getOrderItemId()) {
                         $item->setData('items3', "JON3");
