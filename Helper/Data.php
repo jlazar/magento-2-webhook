@@ -275,8 +275,9 @@ class Data extends CoreHelper
             if ($orderItems) {
                 foreach ($orderItems as $orderItem) {
                    $orderItem['order_item_id'] = $orderItem->getItemId();
+                   $orderItem['item_id'] = $orderItem->getId();
                 }
-                $item->setData('items', $orderItems);
+                $item->setData('items2', $orderItems);
             }
 
             if ($item->getShippingAddress()) {
