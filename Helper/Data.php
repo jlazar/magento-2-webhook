@@ -114,7 +114,8 @@ class Data extends CoreHelper
         LiquidFilters $liquidFilters,
         HookFactory $hookFactory,
         HistoryFactory $historyFactory,
-        CustomerRepositoryInterface $customer
+        CustomerRepositoryInterface $customer,
+        \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
     ) {
         $this->liquidFilters    = $liquidFilters;
         $this->curlFactory      = $curlFactory;
@@ -123,6 +124,7 @@ class Data extends CoreHelper
         $this->transportBuilder = $transportBuilder;
         $this->backendUrl       = $backendUrl;
         $this->customer         = $customer;
+        $this->orderRepository = $orderRepository;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
@@ -273,6 +275,14 @@ class Data extends CoreHelper
             
             
             if ($item->getAllItems()) {
+                $jonorder = $this->orderRepository->get($item->getEntityId());
+                foreach ($jonorder->getAllItems() as $jonitem) {
+                    $item->setData('items5', $jonitem->getItemId());
+                    $item->setData('items6', get_class($jonitem));
+                }
+                $item->setData('items7', get_class($item));
+                $item->setData('items8', $item->getEntityId());
+
                 $item->setData('items3', "JON");
                 $orderItems = [];
                 /** @var OrderItem $orderItem */
