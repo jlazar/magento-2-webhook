@@ -280,19 +280,18 @@ class Data extends CoreHelper
                     if ($orderItem) {
                         $item->setData('items3', "JON2");
                     }
-                    error_log(print_r($orderItem)); 
 
                     if ($orderItem->getItemId()) {
                         $item->setData('items3', "JON3");
+                        $item->setData('items4', print_r($orderItem));
                     }
-                    
+
                     $orderItems[] = [
                         'item_id' => $orderItem->getItemId(),
                         'order_item_id' => $orderItem->getOrderItemId(),
                         'id' => $orderItem->getId(),
                     ];
                 }
-                error_log(print_r($orderItems)); 
 
                 $item->setData('items2', $orderItems);
             }
