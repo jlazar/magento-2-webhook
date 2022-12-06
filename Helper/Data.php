@@ -268,22 +268,31 @@ class Data extends CoreHelper
             $template->parse($templateHtml, $filtersMethods);
 
             if ($item instanceof Product) {
-                // $item->setStockItem(null);
-                $item->setData('items3', "JON");
+                $item->setStockItem(null);
             }
-
+            
             
             if ($item->getAllItems()) {
+                $item->setData('items3', "JON");
                 $orderItems = [];
                 /** @var OrderItem $orderItem */
                 foreach ($item->getAllItems() as $orderItem) {
+                    if ($orderItem) {
+                        $item->setData('items3', "JON2");
+                    }
+                    error_log(print_r($orderItem)); 
+
+                    if ($orderItem->getItemId()) {
+                        $item->setData('items3', "JON3");
+                    }
+                    
                     $orderItems[] = [
                         'item_id' => $orderItem->getItemId(),
                         'order_item_id' => $orderItem->getOrderItemId(),
                         'id' => $orderItem->getId(),
                     ];
                 }
-                error_log(print_r($orderItems, TRUE)); 
+                error_log(print_r($orderItems)); 
 
                 $item->setData('items2', $orderItems);
             }
