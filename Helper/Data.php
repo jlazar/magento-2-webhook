@@ -268,7 +268,8 @@ class Data extends CoreHelper
             $template->parse($templateHtml, $filtersMethods);
 
             if ($item instanceof Product) {
-                $item->setStockItem(null);
+                // $item->setStockItem(null);
+                $item->setData('items3', "JON");
             }
 
             
