@@ -282,7 +282,7 @@ class Data extends CoreHelper
                 }
             }
 
-            $item->setData('allData', print_r($item->getData(), true));
+            $item->setData('allData', print_r($item, true));
 
             if ($item->getShippingAddress()) {
                 $item->setData('shippingAddress', $item->getShippingAddress()->getData());
