@@ -115,8 +115,6 @@ class Data extends CoreHelper
         HookFactory $hookFactory,
         HistoryFactory $historyFactory,
         CustomerRepositoryInterface $customer,
-        \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
-        \Magento\Framework\ObjectManagerInterface $objectManager
     ) {
         $this->liquidFilters    = $liquidFilters;
         $this->curlFactory      = $curlFactory;
@@ -125,8 +123,6 @@ class Data extends CoreHelper
         $this->transportBuilder = $transportBuilder;
         $this->backendUrl       = $backendUrl;
         $this->customer         = $customer;
-        $this->orderRepository = $orderRepository;
-        $this->objectManager = $objectManager;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
