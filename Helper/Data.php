@@ -291,7 +291,16 @@ class Data extends CoreHelper
 
             $str = '';
             foreach ($item->getData() as $key => $value) {
-                $str .= $key."|";
+                $str .= $key.":";
+                if(is_array($value)) {
+                    $str .= $key."(";
+                    foreach ($value as $key => $value) {
+                        $str .= $key.":".$value;
+                    }
+                    $str .= $key.")";
+                } else {
+                    $str .= $value;
+                }
             }
             $item->setData('allData', $str);
 
