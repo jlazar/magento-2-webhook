@@ -115,7 +115,8 @@ class Data extends CoreHelper
         HookFactory $hookFactory,
         HistoryFactory $historyFactory,
         CustomerRepositoryInterface $customer,
-        \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+        \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+        \Magento\Framework\ObjectManagerInterface $objectManager
     ) {
         $this->liquidFilters    = $liquidFilters;
         $this->curlFactory      = $curlFactory;
@@ -125,6 +126,7 @@ class Data extends CoreHelper
         $this->backendUrl       = $backendUrl;
         $this->customer         = $customer;
         $this->orderRepository = $orderRepository;
+        $this->objectManager = $objectManager;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
@@ -274,12 +276,20 @@ class Data extends CoreHelper
             }
             
             if ($item->getAllItems()) {
+                /** @var \Magento\Sales\Model\Order $order */
+                $order = $this->objectManager->create(\Magento\Sales\Model\Order::class)->loadByIncrementId($item->getId());
+                /** @var \Magento\Sales\Api\Data\OrderItemInterface $orderItem */
+                $allOrderItems = $order->getItems();
+
                 $orderItems = [];
-                foreach ($item->getAllItems() as $orderItem) {
+                foreach ($allOrderItems as $key => $orderItem) {
                     $orderItem->setData('order_item_id', $orderItem->getItemId());
+                    $orderItem->setData('order_item_id2', $orderItem->getId());
+                    $orderItem->setData('key', $key);
                     $orderItems[] = $orderItem->getData();
                     $item->setData('itemData', print_r($orderItem->getData(), true));
                 }
+                $item->setData('orderItems', $orderItems);
             }
 
             if ($item->getShippingAddress()) {
