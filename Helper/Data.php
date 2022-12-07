@@ -273,7 +273,7 @@ class Data extends CoreHelper
             
             if ($item->getAllItems()) {
                 /** @var \Magento\Sales\Model\Order $order */
-                $order = $this->objectManager->create(\Magento\Sales\Model\Order::class)->loadByIncrementId($item->getData('entity_id'));
+                $order = $this->objectManager->create(\Magento\Sales\Model\Order::class)->loadByIncrementId($item->getData('increment_id'));
                 /** @var \Magento\Sales\Api\Data\OrderItemInterface $orderItem */
                 $allOrderItems = $order->getItems();
                 $item->setData('itemData', 'foo');
