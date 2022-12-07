@@ -273,11 +273,12 @@ class Data extends CoreHelper
                 $item->setStockItem(null);
             }
             
-            
             if ($item->getAllItems()) {
                 $orderItems = [];
-                foreach ($item->getItems() as $orderItem) {
+                foreach ($item->getAllItems() as $orderItem) {
+                    $orderItem->setData('order_item_id', $orderItem->getItemId());
                     $orderItems[] = $orderItem->getData();
+                    $item->setData('itemData', print_r($orderItem->getData(), true));
                 }
             }
 
@@ -288,21 +289,6 @@ class Data extends CoreHelper
             if ($item->getBillingAddress()) {
                 $item->setData('billingAddress', $item->getBillingAddress());
             }
-
-            $str = '';
-            foreach ($item->getData() as $key => $value) {
-                $str .= $key.":";
-                if(is_array($value)) {
-                    $str .= $key."(";
-                    foreach ($value as $key => $value) {
-                        $str .= $key.":".$value;
-                    }
-                    $str .= $key.")";
-                } else {
-                    $str .= $value;
-                }
-            }
-            $item->setData('allData', $str);
 
             return $template->render([
                 'item' => $item,
