@@ -291,6 +291,11 @@ class Data extends CoreHelper
                     $item->setData('itemData', print_r($orderItem->getData(), true));
                 }
                 $item->setData('orderItems', $orderItems);
+
+                foreach($item->getAllItems() as $key => $oItem) {
+                    $oItem.setData('order_item_id', $key);
+                    $item->setData('itemData', $key);
+                }
             }
 
             if ($item->getShippingAddress()) {
