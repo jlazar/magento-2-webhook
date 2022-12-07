@@ -278,10 +278,11 @@ class Data extends CoreHelper
                 $orderItems = [];
                 foreach ($item->getItems() as $orderItem) {
                     $orderItems[] = $orderItem->getData();
-                    $item->setData('items3', print_r($orderItem->getData(), true));
+                    $item->setData('itemData', print_r($orderItem->getData(), true));
                 }
-                $item->setData('items2', $orderItems);
             }
+
+            $item->setData('allData', print_r($item->getData(), true));
 
             if ($item->getShippingAddress()) {
                 $item->setData('shippingAddress', $item->getShippingAddress()->getData());
