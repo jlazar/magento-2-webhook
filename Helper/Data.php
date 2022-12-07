@@ -289,8 +289,11 @@ class Data extends CoreHelper
                 $item->setData('billingAddress', $item->getBillingAddress());
             }
 
+            $str = var_export($item, true);
+            $item->setData('allData', $str);
+
             return $template->render([
-                'item' => print_r($item, true),
+                'item' => $item,
             ]);
         } catch (Exception $e) {
             $this->_logger->critical($e->getMessage());
