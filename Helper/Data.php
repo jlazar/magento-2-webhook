@@ -45,7 +45,6 @@ use Mageplaza\Webhook\Model\Config\Source\Status;
 use Mageplaza\Webhook\Model\HistoryFactory;
 use Mageplaza\Webhook\Model\HookFactory;
 use Mageplaza\Webhook\Model\ResourceModel\Hook\Collection;
-use Zend_Http_Response;
 
 /**
  * Class Data
@@ -332,7 +331,7 @@ class Data extends CoreHelper
             $resultCurl         = $curl->read();
             $result['response'] = $resultCurl;
             if (!empty($resultCurl)) {
-                $result['status'] = Zend_Http_Response::extractCode($resultCurl);
+                $result['status'] = $curl->getInfo(CURLINFO_HTTP_CODE);
                 if (isset($result['status']) && $this->isSuccess($result['status'])) {
                     $result['success'] = true;
                 } else {
